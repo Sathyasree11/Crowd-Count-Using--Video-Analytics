@@ -1,0 +1,348 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>My Uploads</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/static/styles.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #f5f7fa;
+      min-height: 100vh;
+      color: #2d3748;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+    
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .header h1 {
+      font-size: 1.875rem;
+      font-weight: 600;
+      color: #1a202c;
+      letter-spacing: -0.025em;
+    }
+    
+    .header-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+    
+    .btn {
+      padding: 0.625rem 1.25rem;
+      border-radius: 6px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-size: 0.875rem;
+      display: inline-block;
+      line-height: 1.5;
+    }
+    
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+      border-color: #2563eb;
+    }
+    
+    .btn-primary:hover {
+      background: #1d4ed8;
+      border-color: #1d4ed8;
+    }
+    
+    .btn-secondary {
+      background: white;
+      color: #4b5563;
+      border-color: #d1d5db;
+    }
+    
+    .btn-secondary:hover {
+      background: #f9fafb;
+      border-color: #9ca3af;
+    }
+    
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .stat-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+    
+    .stat-label {
+      font-size: 0.875rem;
+      color: #6b7280;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+    }
+    
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #111827;
+    }
+    
+    .content-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+    }
+    
+    .table-container {
+      overflow-x: auto;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    thead {
+      background: #f9fafb;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    
+    th {
+      padding: 0.875rem 1.5rem;
+      text-align: left;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    tbody tr {
+      border-bottom: 1px solid #f3f4f6;
+      transition: background-color 0.15s ease;
+    }
+    
+    tbody tr:hover {
+      background: #f9fafb;
+    }
+    
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+    
+    td {
+      padding: 1.25rem 1.5rem;
+      font-size: 0.875rem;
+    }
+    
+    .file-name {
+      font-weight: 500;
+      color: #111827;
+      word-break: break-word;
+    }
+    
+    .file-meta {
+      color: #6b7280;
+      font-size: 0.8125rem;
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .btn-sm {
+      padding: 0.5rem 0.875rem;
+      font-size: 0.8125rem;
+      white-space: nowrap;
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    
+    .empty-state-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1.5rem;
+      background: #f3f4f6;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9ca3af;
+      font-size: 1.5rem;
+    }
+    
+    .empty-state h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.5rem;
+    }
+    
+    .empty-state p {
+      color: #6b7280;
+      font-size: 0.9375rem;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem 1rem;
+      }
+      
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      
+      .header-actions {
+        width: 100%;
+      }
+      
+      .btn {
+        flex: 1;
+        text-align: center;
+      }
+      
+      .stats-row {
+        grid-template-columns: 1fr;
+      }
+      
+      table {
+        font-size: 0.8125rem;
+      }
+      
+      th, td {
+        padding: 0.75rem 1rem;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+      }
+      
+      .btn-sm {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>My Uploads</h1>
+      <div class="header-actions">
+        <a class="btn btn-secondary" href="#" onclick="window.history.back(); return false;">Back</a>
+        <a class="btn btn-primary" href="/logout">Logout</a>
+      </div>
+    </div>
+
+    {% if videos and videos|length > 0 %}
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">Total Files</div>
+          <div class="stat-value">{{ videos|length }}</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total Storage</div>
+          <div class="stat-value">
+            {% set total_size = namespace(value=0) %}
+            {% for v in videos %}
+              {% set total_size.value = total_size.value + (v.size_bytes or 0) %}
+            {% endfor %}
+            {% if total_size.value > 1073741824 %}
+              {{ "%.2f"|format(total_size.value / 1073741824) }} GB
+            {% elif total_size.value > 1048576 %}
+              {{ "%.2f"|format(total_size.value / 1048576) }} MB
+            {% elif total_size.value > 1024 %}
+              {{ "%.2f"|format(total_size.value / 1024) }} KB
+            {% else %}
+              {{ total_size.value }} B
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>File Name</th>
+                <th>Size</th>
+                <th>Upload Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for v in videos %}
+                <tr>
+                  <td>
+                    <div class="file-name">{{ v.original_name }}</div>
+                  </td>
+                  <td class="file-meta">
+                    {% if v.size_bytes > 1073741824 %}
+                      {{ "%.2f"|format((v.size_bytes or 0) / 1073741824) }} GB
+                    {% elif v.size_bytes > 1048576 %}
+                      {{ "%.2f"|format((v.size_bytes or 0) / 1048576) }} MB
+                    {% elif v.size_bytes > 1024 %}
+                      {{ "%.2f"|format((v.size_bytes or 0) / 1024) }} KB
+                    {% else %}
+                      {{ v.size_bytes or 0 }} bytes
+                    {% endif %}
+                  </td>
+                  <td class="file-meta">{{ v.created_at }}</td>
+                  <td>
+                    <div class="action-buttons">
+                      <a class="btn btn-secondary btn-sm" href="/video_db/{{ v.id }}">View</a>
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    {% else %}
+      <div class="content-card">
+        <div class="empty-state">
+          <div class="empty-state-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+              <polyline points="13 2 13 9 20 9"></polyline>
+            </svg>
+          </div>
+          <h3>No uploads yet</h3>
+          <p>Your uploaded videos will appear here</p>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>

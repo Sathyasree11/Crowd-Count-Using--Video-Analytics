@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #ecf0f1;
+            min-height: 100vh;
+            padding: 30px 15px;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: white;
+            color: #2c3e50;
+            border: 2px solid #3498db;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background: #3498db;
+            color: white;
+            transform: translateX(-3px);
+            box-shadow: 0 6px 16px rgba(52, 152, 219, 0.3);
+        }
+
+        .back-button::before {
+            content: '←';
+            font-size: 18px;
+        }
+
+        .profile-container {
+            display: flex;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            min-height: 600px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        form#profileForm {
+            display: flex; /* Added: make form horizontal flex */
+            width: 100%;
+        }
+
+        .profile-header {
+            flex: 0 0 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 50px 20px;
+            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+            position: relative;
+            border-right: 3px solid #3498db;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid white;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .file-input {
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            color: white;
+            font-size: 12px;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .file-input::file-selector-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 8px;
+        }
+
+        .edit-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .edit-button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(52, 152, 219, 0.5);
+        }
+
+        .profile-body {
+            flex: 1;
+            padding: 50px 40px;
+            background: #fafafa;
+            overflow-y: auto;
+        }
+
+        .name-header {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+        }
+
+        .name-input {
+            color: #2c3e50;
+            font-size: 36px;
+            font-weight: 700;
+            border: none;
+            background: transparent;
+            width: 100%;
+            padding: 10px 0;
+            border-radius: 6px;
+        }
+
+        .name-input:focus {
+            outline: none;
+            background: white;
+            padding: 10px 15px;
+            border: 2px solid #3498db;
+        }
+
+        .name-input[readonly] {
+            border: none;
+            background: transparent;
+            padding: 0;
+            cursor: default;
+        }
+
+        .section {
+            margin-bottom: 45px;
+        }
+
+        .section-title {
+            color: #2c3e50;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #3498db;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title1 {
+            color: #e5eaee;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            margin-top: 25px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #3498db;
+            position: relative;
+            display: inline-block;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px 30px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .info-label {
+            font-size: 11px;
+            color: #7f8c8d;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-value {
+            color: #2c3e50;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 10px 14px;
+            border: 2px solid #e0e0e0;
+            background: #fafafa;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            resize: none;
+            line-height: 1.6;
+        }
+
+        .info-value:focus {
+            outline: none;
+            border-color: #3498db;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .info-value[readonly] {
+            border-color: transparent;
+            background: transparent;
+            padding: 8px 0;
+            cursor: default;
+        }
+
+        .info-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .address-lines {
+            line-height: 1.8;
+            min-height: 80px;
+        }
+
+        .about-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #3498db;
+        }
+
+        .about-text {
+            color: #2c3e50;
+            font-size: 15px;
+            line-height: 1.8;
+            width: 100%;
+            border: none;
+            background: transparent;
+            resize: none;
+            min-height: 120px;
+        }
+
+        .about-text:focus {
+            outline: none;
+            background: #fafafa;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .about-text[readonly] {
+            cursor: default;
+        }
+
+        .save-button {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .save-button:hover {
+            background: #229954;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(39, 174, 96, 0.5);
+        }
+
+    </style>
+</head>
+<body>
+    <a href="#" class="back-button" onclick="window.history.back(); return false;">Back</a>
+
+    <div class="profile-container">
+        <form method="POST" enctype="multipart/form-data" id="profileForm">
+            <div class="profile-header">
+                <img src="{{ url_for('uploaded_file', filename=user.profile_image) if user.profile_image else 'https://via.placeholder.com/200' }}" class="profile-image" alt="Profile Picture" id="profileImagePreview">
+                <input type="file" name="profile_image" class="file-input" id="profileImageInput" style="display:none;" accept="image/*">
+                <button type="button" class="edit-button" id="editButton">Edit Profile</button>
+                
+                <div class="section">
+                    <h2 class="section-title1">About Me</h2>
+                    <div class="about-section">
+                        <textarea name="about" class="about-text" rows="5" readonly>{{ user.about or '' }}</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-body">
+                <div class="name-header">
+                    <input type="text" name="full_name" value="{{ user.full_name or '' }}" class="name-input" readonly id="fullName">
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Personal Information</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label class="info-label">Contact Number</label>
+                            <input type="text" name="phone" value="{{ user.phone or '' }}" class="info-value" readonly>
+                        </div>
+                        <div class="info-item">
+                            <label class="info-label">Email Address</label>
+                            <input type="text" name="email" value="{{ user.email or '' }}" class="info-value" readonly>
+                        </div>
+                        <div class="info-item">
+                            <label class="info-label">Date of Birth</label>
+                            <input type="date" name="dob" value="{{ user.dob or '' }}" class="info-value" readonly>
+                        </div>
+                        <div class="info-item">
+                            <label class="info-label">Gender</label>
+                            <input type="text" name="gender" value="{{ user.gender or '' }}" class="info-value" readonly>
+                        </div>
+                        <div class="info-item full-width">
+                            <label class="info-label">Address</label>
+                            <textarea name="address" class="info-value address-lines" rows="3" readonly>{{ user.address or '' }}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+                <button type="submit" class="save-button" id="saveButton" style="display:none;">Save Changes</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const editButton = document.getElementById('editButton');
+        const saveButton = document.getElementById('saveButton');
+        const profileForm = document.getElementById('profileForm');
+        const fileInput = document.getElementById('profileImageInput');
+        const profileImagePreview = document.getElementById('profileImagePreview');
+
+        editButton.addEventListener('click', () => {
+            const inputs = profileForm.querySelectorAll('input, textarea');
+            inputs.forEach(input => input.removeAttribute('readonly'));
+            fileInput.style.display = 'block';
+            saveButton.style.display = 'inline-block';
+            editButton.style.display = 'none';
+        });
+
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profileImagePreview.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>

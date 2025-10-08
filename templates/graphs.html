@@ -1,0 +1,464 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Analytics Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --secondary-color: #64748b;
+      --success-color: #10b981;
+      --danger-color: #ef4444;
+      --warning-color: #f59e0b;
+      --bg-primary: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+    }
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .dashboard-container {
+      background: var(--bg-primary);
+      min-height: 100vh;
+      padding: 2rem 0;
+    }
+    .header-card {
+      background: linear-gradient(135deg, var(--primary-color) 0%, #1e40af 100%);
+      color: white;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+    }
+    .header-card h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .header-card .subtitle {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin-top: 0.5rem;
+    }
+    .metric-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--border-color);
+      transition: transform 0.2s, box-shadow 0.2s;
+      height: 100%;
+    }
+    .metric-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+    .chart-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 1.75rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--border-color);
+      margin-bottom: 1.5rem;
+    }
+    .chart-card.full-height {
+      height: calc(70vh);
+      display: flex;
+      flex-direction: column;
+    }
+    .chart-card.full-height .chart-wrapper {
+      flex: 1;
+      min-height: 0;
+    }
+    .chart-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .chart-title i {
+      color: var(--primary-color);
+    }
+    .heatmap-container {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .heatmap-labels {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      padding-right: 0.75rem;
+    }
+    .heatmap-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      padding: 0.5rem 0;
+    }
+    .heatmap-grid {
+      display: grid;
+      gap: 0.5rem;
+    }
+    .heatmap-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+      gap: 0.5rem;
+    }
+    .heatmap-cell {
+      aspect-ratio: 1;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: white;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .heatmap-cell:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .heatmap-legend {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    .legend-gradient {
+      height: 20px;
+      width: 200px;
+      border-radius: 4px;
+      background: linear-gradient(to right, 
+        rgba(59, 130, 246, 0.2), 
+        rgba(59, 130, 246, 0.4), 
+        rgba(59, 130, 246, 0.6), 
+        rgba(59, 130, 246, 0.8), 
+        rgba(59, 130, 246, 1));
+    }
+    .btn-back {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      border-radius: 8px;
+      padding: 0.5rem 1.25rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .btn-back:hover {
+      background: rgba(255, 255, 255, 0.3);
+      color: white;
+      transform: translateX(-4px);
+    }
+    @media (max-width: 768px) {
+      .dashboard-container {
+        padding: 1rem 0;
+      }
+      .header-card {
+        padding: 1.5rem;
+      }
+      .chart-card {
+        padding: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <div class="container">
+      {% if file %}
+      <iframe src="/?file={{ file }}&hidden=1" style="width:0;height:0;border:0; position:absolute; opacity:0;"></iframe>
+      {% endif %}
+      
+      <div class="header-card">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <h1>
+              <i class="bi bi-graph-up"></i>
+              Analytics Dashboard
+            </h1>
+            <div class="subtitle">Real-time zone monitoring and population analytics</div>
+          </div>
+          <a class="btn btn-back" href="#" onclick="window.history.back()">
+            <i class="bi bi-arrow-left"></i> Back
+          </a>
+        </div>
+      </div>
+
+      <div class="row g-3 mb-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="metric-card">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <div class="text-secondary small mb-1">Total Zones</div>
+                <h3 class="mb-0" id="totalZones">-</h3>
+              </div>
+              <i class="bi bi-pin-map fs-2 text-primary"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="metric-card">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <div class="text-secondary small mb-1">Total Population</div>
+                <h3 class="mb-0" id="totalPeople">-</h3>
+              </div>
+              <i class="bi bi-people fs-2 text-success"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="metric-card">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <div class="text-secondary small mb-1">Highest Zone</div>
+                <h3 class="mb-0 small" id="highestZone">-</h3>
+              </div>
+              <i class="bi bi-arrow-up-circle fs-2 text-warning"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="metric-card">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <div class="text-secondary small mb-1">Active Zones</div>
+                <h3 class="mb-0" id="activeZones">-</h3>
+              </div>
+              <i class="bi bi-check-circle fs-2 text-info"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="chart-card" style="height: 90vh;">
+        <div class="chart-title">
+          <i class="bi bi-graph-up-arrow"></i>
+          Zone Counts Over Time
+        </div>
+        <div style="height: calc(100% - 40px); position: relative;">
+          <canvas id="lineChart"></canvas>
+        </div>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-lg-6">
+          <div class="chart-card">
+            <div class="chart-title">
+              <i class="bi bi-bar-chart"></i>
+              Zone-wise Population (Current)
+            </div>
+            <div class="ratio" style="--bs-aspect-ratio:75%;">
+              <canvas id="barChart"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="chart-card">
+            <div class="chart-title">
+              <i class="bi bi-grid-3x3"></i>
+              Zone Activity Heatmap
+            </div>
+            <div id="heatmapContainer" class="heatmap-container"></div>
+            <div class="heatmap-legend">
+              <span>Low</span>
+              <div class="legend-gradient"></div>
+              <span>High</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const file = "{{ file }}";
+    let lineChart, barChart;
+    
+    async function fetchData(){
+      const res = await fetch(`/api/recent_counts?file=${encodeURIComponent(file)}`);
+      return await res.json();
+    }
+    
+    function ensureCharts(){
+      const lc = document.getElementById('lineChart');
+      const bc = document.getElementById('barChart');
+      
+      if (!lineChart){ 
+        lineChart = new Chart(lc, { 
+          type:'line', 
+          data:{ labels:[], datasets:[] }, 
+          options:{ 
+            responsive:true, 
+            maintainAspectRatio:false,
+            plugins: {
+              legend: {
+                position: 'top',
+                labels: {
+                  usePointStyle: true,
+                  padding: 15,
+                  font: { size: 11 }
+                }
+              }
+            },
+            scales: {
+              y: { 
+                beginAtZero: true,
+                grid: { color: 'rgba(0,0,0,0.05)' }
+              },
+              x: {
+                grid: { display: false }
+              }
+            }
+          } 
+        }); 
+      }
+      
+      if (!barChart){ 
+        barChart = new Chart(bc, { 
+          type:'bar', 
+          data:{ 
+            labels:[], 
+            datasets:[{ 
+              label:'People', 
+              data:[], 
+              backgroundColor:'rgba(37, 99, 235, 0.8)',
+              borderRadius: 8,
+              borderSkipped: false
+            }] 
+          }, 
+          options:{ 
+            responsive:true, 
+            maintainAspectRatio:false, 
+            plugins:{
+              legend:{display:false}
+            }, 
+            scales:{
+              y:{
+                beginAtZero:true,
+                grid: { color: 'rgba(0,0,0,0.05)' }
+              },
+              x: {
+                grid: { display: false }
+              }
+            }
+          } 
+        }); 
+      }
+    }
+    
+    function generateHeatmap(data) {
+      const container = document.getElementById('heatmapContainer');
+      const zones = Object.entries(data.current);
+      
+      if (zones.length === 0) {
+        container.innerHTML = '<div class="text-center text-secondary p-4">No data available</div>';
+        return;
+      }
+      
+      const maxVal = Math.max(...zones.map(([_, v]) => v), 1);
+      const rows = Math.ceil(zones.length / 6);
+      
+      let html = '<div class="heatmap-labels">';
+      zones.forEach(([id, _], idx) => {
+        if (idx % 6 === 0) {
+          const label = data.series[id]?.label || id;
+          html += `<div class="heatmap-label">${label}</div>`;
+        }
+      });
+      html += '</div><div class="heatmap-grid">';
+      
+      for (let row = 0; row < rows; row++) {
+        html += '<div class="heatmap-row">';
+        for (let col = 0; col < 6; col++) {
+          const idx = row * 6 + col;
+          if (idx < zones.length) {
+            const [id, val] = zones[idx];
+            const intensity = val / maxVal;
+            const hue = 220;
+            const alpha = 0.2 + (intensity * 0.8);
+            const bgColor = `hsla(${hue}, 80%, 50%, ${alpha})`;
+            html += `<div class="heatmap-cell" style="background-color: ${bgColor}" title="${data.series[id]?.label || id}: ${val}">${val}</div>`;
+          }
+        }
+        html += '</div>';
+      }
+      html += '</div>';
+      
+      container.innerHTML = html;
+    }
+    
+    function updateMetrics(data) {
+      const zones = Object.keys(data.current);
+      const total = Object.values(data.current).reduce((a, b) => a + b, 0);
+      const highest = Object.entries(data.current).sort((a, b) => b[1] - a[1])[0];
+      const active = Object.values(data.current).filter(v => v > 0).length;
+      
+      document.getElementById('totalZones').textContent = zones.length;
+      document.getElementById('totalPeople').textContent = total;
+      document.getElementById('highestZone').textContent = highest ? (data.series[highest[0]]?.label || highest[0]) : '-';
+      document.getElementById('activeZones').textContent = active;
+    }
+    
+    function updateCharts(d){
+      ensureCharts();
+      
+      const labels = d.labels.map(ts=> new Date(ts*1000).toLocaleTimeString());
+      lineChart.data.labels = labels;
+      lineChart.data.datasets = Object.entries(d.series).map(([id, s], idx)=> ({
+        label: s.label,
+        data: s.data,
+        borderWidth:2,
+        pointRadius:0,
+        tension:0.3,
+        borderColor: `hsl(${(idx*67)%360} 70% 50%)`,
+        backgroundColor: `hsla(${(idx*67)%360} 70% 50% / 0.1)`
+      }));
+      lineChart.update('none');
+      
+      const barLabels = Object.entries(d.series).map(([id, s])=> s.label);
+      const barData = Object.entries(d.current).map(([id, v])=> v);
+      barChart.data.labels = barLabels;
+      barChart.data.datasets[0].data = barData;
+      barChart.update('none');
+      
+      generateHeatmap(d);
+      updateMetrics(d);
+    }
+    
+    async function tick(){ 
+      try { 
+        const d = await fetchData(); 
+        updateCharts(d); 
+      } catch(e){
+        console.error('Fetch error:', e);
+      } finally { 
+        setTimeout(tick, 1000); 
+      } 
+    }
+    
+    tick();
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
