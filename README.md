@@ -47,6 +47,9 @@ This project integrates **TensorFlow.js**, **Flask**, **MySQL**, and **Chart.js*
 - Built using **HTML5, CSS3, and Vanilla JS**.  
 - Lightweight, fast, and responsive across devices.
 
+---
+
+
 ## 💻 Technology Stack
 
 | Component | Technology |
