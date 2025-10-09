@@ -75,6 +75,15 @@ CrowdCountingPortal/
 └── README.md             # Project documentation
 
 ---
+| Layer             | Technology Used                             |
+| ----------------- | ------------------------------------------- |
+| **Frontend**      | HTML5, CSS3, JavaScript (Vanilla), Chart.js |
+| **Backend**       | Python Flask                                |
+| **AI Model**      | TensorFlow.js + COCO-SSD                    |
+| **Database**      | MySQL (pymysql connector)                   |
+| **Storage**       | Local filesystem + CSV logs                 |
+| **Visualization** | Chart.js + custom heatmap rendering         |
+
 
 ## 💻 Technology Stack
 
