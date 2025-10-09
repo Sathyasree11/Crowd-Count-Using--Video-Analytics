@@ -113,6 +113,7 @@ MySQL Server
 
 Node.js (optional for frontend editing)
 
+
 ### 💾 Setup Guide
 
 #### 1️⃣ Clone the repository
@@ -145,24 +146,43 @@ http://127.0.0.1:5000/
 
 
 CrowdCountingPortal/
+
 │
+
 ├── app.py                # Flask backend (uploads, zones, alerts, DB)
+
 │
+
 ├── templates/            # HTML templates
+
 │   ├── index.html        # Main dashboard with video + zones
+
 │   ├── graphs.html       # Real-time analytics dashboard
+
 │   ├── alerts.html       # Threshold alert visualization
+
 │   ├── login.html        # User login
+
 │   ├── register.html     # User registration
+
 │   └── my_uploads.html   # Manage uploaded videos
+
 │
+
 ├── static/
+
 │   ├── app.js            # Frontend logic (drawing, counting, heatmap)
+
 │   └── style.css         # Responsive modern styles
+
 │
+
 ├── uploads/              # User-uploaded video files
+
 ├── counts_log.csv        # Automatic crowd data log
+
 ├── zones.json            # Saved zone coordinates
+
 └── README.md             # Project documentation
 
 
@@ -173,7 +193,8 @@ CrowdCountingPortal/
 ### 1️⃣ Register Page
 > Users can create a new account by entering full details like First Name, Last Name, Email, Contact Number, Date of Birth, Gender, State, and District.
 
-🖼️ **Screenshot:** `register_page.png`  
+🖼️ **Screenshot:** 
+![Image](https://github.com/user-attachments/assets/66efde91-b5e2-47da-ac17-201bc38cded1)
 💡 *Provides secure registration with MySQL integration.*
 
 ---
