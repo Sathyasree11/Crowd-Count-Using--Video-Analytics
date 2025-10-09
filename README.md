@@ -115,7 +115,7 @@ Node.js (optional for frontend editing)
 
 ### 💾 Setup Guide
 
-##### 1️⃣ Clone the repository
+#### 1️⃣ Clone the repository
 git clone https://github.com/Sathyasree11/Crowd-Count-Using--Video-Analytics
 
 #### 2️⃣ Create and activate virtual environment
@@ -123,17 +123,17 @@ python -m venv venv
 venv\Scripts\activate      
 source venv/bin/activate   
 
- 3️⃣ Install dependencies
+#### 3️⃣ Install dependencies
 pip install flask pymysql
 
- 4️⃣ Configure database
+#### 4️⃣ Configure database
  - Create a database in MySQL (e.g., crowd_portal)
  - Update DB_CONFIG in app.py with your credentials
 
- 5️⃣ Run the application
+#### 5️⃣ Run the application
 python app.py
 
- 6️⃣ Open your browser
+#### 6️⃣ Open your browser
 http://127.0.0.1:5000/
 
 
@@ -143,7 +143,7 @@ http://127.0.0.1:5000/
 
 ## 🗂️ Project Structure
 
-```bash
+
 CrowdCountingPortal/
 │
 ├── app.py                # Flask backend (uploads, zones, alerts, DB)
@@ -164,6 +164,8 @@ CrowdCountingPortal/
 ├── counts_log.csv        # Automatic crowd data log
 ├── zones.json            # Saved zone coordinates
 └── README.md             # Project documentation
+
+
 ---
 
 ## 🧾 Output / Results
