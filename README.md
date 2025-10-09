@@ -74,6 +74,7 @@ CrowdCountingPortal/
 ├── zones.json            # Saved zone coordinates
 └── README.md             # Project documentation
 
+---
 
 ## 💻 Technology Stack
 
