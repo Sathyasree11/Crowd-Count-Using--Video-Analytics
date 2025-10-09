@@ -105,7 +105,7 @@ Visualization → Chart.js + Alerts
 
 
 ## ⚙️ Installation & Setup
-# 🛠️ Prerequisites
+### 🛠️ Prerequisites
 
 Python 3.8 or higher
 
@@ -113,12 +113,12 @@ MySQL Server
 
 Node.js (optional for frontend editing)
 
-# 💾 Setup Guide
+### 💾 Setup Guide
 
- 1️⃣ Clone the repository
+##### 1️⃣ Clone the repository
 git clone https://github.com/Sathyasree11/Crowd-Count-Using--Video-Analytics
 
- 2️⃣ Create and activate virtual environment
+#### 2️⃣ Create and activate virtual environment
 python -m venv venv
 venv\Scripts\activate      
 source venv/bin/activate   
