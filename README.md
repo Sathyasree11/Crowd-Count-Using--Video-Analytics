@@ -77,8 +77,11 @@ View Dashboard – Live population trends & alerts update in real-time.
 
 Export Data – Save data as CSV for reports or analysis.
 
-🧠 System Architecture
 ---
+
+
+## 🧠 System Architecture
+
 Video Input (Webcam/Upload)
         ↓
 Object Detection (TensorFlow.js)
@@ -89,7 +92,11 @@ Flask Backend → MySQL + CSV Logging
         ↓
 Visualization → Chart.js + Alerts
 
-🗄️ Database Schema Overview
+---
+
+
+
+## 🗄️ Database Schema Overview
 1. users
 id	username	password	email	created_at
 2. videos
@@ -104,7 +111,9 @@ id	username	password	email	created_at
 
 | id | video_id | zone_id | ts | label | current | peak |
 
-⚙️ Installation & Setup
+---
+
+## ⚙️ Installation & Setup
 🛠️ Prerequisites
 
 Python 3.8 or higher
@@ -135,6 +144,9 @@ python app.py
 
 # 6️⃣ Open your browser
 http://127.0.0.1:5000/
+
+
+---
 
 
 
