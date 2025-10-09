@@ -105,7 +105,7 @@ Visualization → Chart.js + Alerts
 
 
 ## ⚙️ Installation & Setup
-🛠️ Prerequisites
+# 🛠️ Prerequisites
 
 Python 3.8 or higher
 
@@ -113,7 +113,7 @@ MySQL Server
 
 Node.js (optional for frontend editing)
 
-💾 Setup Guide
+# 💾 Setup Guide
 
  1️⃣ Clone the repository
 git clone https://github.com/Sathyasree11/Crowd-Count-Using--Video-Analytics
@@ -164,6 +164,112 @@ CrowdCountingPortal/
 ├── counts_log.csv        # Automatic crowd data log
 ├── zones.json            # Saved zone coordinates
 └── README.md             # Project documentation
+---
+
+## 🧾 Output / Results
+
+### 1️⃣ Register Page
+> Users can create a new account by entering full details like First Name, Last Name, Email, Contact Number, Date of Birth, Gender, State, and District.
+
+🖼️ **Screenshot:** `register_page.png`  
+💡 *Provides secure registration with MySQL integration.*
+
+---
+
+### 2️⃣ Login Page
+> Registered users can log in securely using their username and password.
+
+🖼️ **Screenshot:** `login_page.png`  
+💡 *Implements Flask session management for authentication.*
+
+---
+
+### 3️⃣ Dashboard Page
+> Displays workflow steps and system navigation.
+
+🖼️ **Screenshot:** `dashboard_page.png`  
+💡 *Acts as the control center for all features.*
+
+---
+
+### 4️⃣ Drawing Zones
+> Allows users to draw custom zones directly on video frames for crowd tracking.
+
+🖼️ **Screenshot:** `draw_zones.png`  
+💡 *Each zone can be named and stored in the database.*
+
+---
+
+### 5️⃣ Preview Zones
+> Displays previously created zones for review before running detection.
+
+🖼️ **Screenshot:** `preview_zones.png`  
+💡 *Ensures users verify zone setup before analytics.*
+
+---
+
+### 6️⃣ Edit Zones
+> Modify existing zone coordinates or labels dynamically.
+
+🖼️ **Screenshot:** `edit_zones.png`  
+💡 *Provides flexibility for changing monitored areas.*
+
+---
+
+### 7️⃣ Delete Zones
+> Remove unwanted zones from the database.
+
+🖼️ **Screenshot:** `delete_zones.png`  
+💡 *Keeps workspace clean and manageable.*
+
+---
+
+### 8️⃣ Real-Time Dashboard with Count Updates
+> Displays live people counts in each zone using AI detection.
+
+🖼️ **Screenshot:** `realtime_dashboard.png`  
+💡 *Counts refresh dynamically as detection runs.*
+
+---
+
+### 📈 Graphs & Analytics
+
+#### 🔹 Line Chart – Zone Counts Over Time
+> Visualizes how crowd density changes in each zone dynamically.
+
+🖼️ **Screenshot:** `line_chart.png`  
+💡 *Perfect for monitoring time-based population fluctuations.*
+
+---
+
+#### 🔹 Bar Chart – Current Zone-Wise Counts
+> Displays the current number of people detected in each zone.
+
+🖼️ **Screenshot:** `bar_chart.png`  
+💡 *Helps compare crowd intensity across multiple zones.*
+
+---
+
+### ⚠️ Alert System Triggered
+> Automatically alerts users when the crowd in any zone exceeds the predefined threshold.
+
+🖼️ **Screenshot:** `alert_triggered.png`  
+💡 *Color-coded alert levels ensure quick visual identification.*
+
+---
+
+### 📤 Data Export (CSV)
+> User can export detailed count logs for offline analysis or reporting.
+
+🖼️ **Screenshot:** `export_csv.png`  
+💡 *Stored logs include timestamps, zone IDs, and count values.*
+
+---
+
+📍**Summary:**  
+The system provides a complete real-time people analytics experience — from secure user authentication and zone management to live detection, visualization, and alerts.
+
+---
 
 
 
