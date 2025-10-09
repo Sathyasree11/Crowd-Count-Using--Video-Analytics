@@ -87,6 +87,7 @@ CrowdCountingPortal/
 | **Data Logging** | CSV + MySQL |
 | **Visualization** | Chart.js (Line, Bar) |
 
+
 ⚙️ How It Works
 
 Login/Register – Secure authentication with Flask sessions.
