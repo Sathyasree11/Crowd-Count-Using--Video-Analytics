@@ -63,6 +63,23 @@ This project integrates **TensorFlow.js**, **Flask**, **MySQL**, and **Chart.js*
 
 ---
 
+⚙️ How It Works
+
+Login/Register – Secure authentication with Flask sessions.
+
+Upload or Stream Video – Choose a live webcam feed or local file.
+
+Draw Zones – Define specific areas for crowd detection.
+
+Start Detection – AI model counts people in each zone.
+
+View Dashboard – Live population trends & alerts update in real-time.
+
+Export Data – Save data as CSV for reports or analysis.
+
+🧠 System Architecture
+---
+
 ## 🗂️ Project Structure
 
 ```bash
