@@ -83,35 +83,26 @@ Export Data – Save data as CSV for reports or analysis.
 ## 🧠 System Architecture
 
 Video Input (Webcam/Upload)
+
         ↓
+
 Object Detection (TensorFlow.js)
+
         ↓
+
 Zone Mapping → Count Calculation
+
         ↓
+
 Flask Backend → MySQL + CSV Logging
+
         ↓
+
 Visualization → Chart.js + Alerts
 
 ---
 
 
-
-## 🗄️ Database Schema Overview
-1. users
-id	username	password	email	created_at
-2. videos
-
-| id | user_id | filename | size_bytes | created_at |
-
-3. video_zones
-
-| id | video_id | zone_id | label | coordinates |
-
-4. zone_counts
-
-| id | video_id | zone_id | ts | label | current | peak |
-
----
 
 ## ⚙️ Installation & Setup
 🛠️ Prerequisites
@@ -123,26 +114,26 @@ MySQL Server
 Node.js (optional for frontend editing)
 
 💾 Setup Guide
-# 1️⃣ Clone the repository
-git clone https://github.com/yourusername/CrowdCountingPortal.git
+ 1️⃣ Clone the repository
+git clone [https://github.com/yourusername/CrowdCountingPortal.git](https://github.com/Sathyasree11/Crowd-Count-Using--Video-Analytics)
 cd CrowdCountingPortal
 
-# 2️⃣ Create and activate virtual environment
+ 2️⃣ Create and activate virtual environment
 python -m venv venv
 venv\Scripts\activate      # (Windows)
 source venv/bin/activate   # (Mac/Linux)
 
-# 3️⃣ Install dependencies
+ 3️⃣ Install dependencies
 pip install flask pymysql
 
-# 4️⃣ Configure database
-# - Create a database in MySQL (e.g., crowd_portal)
-# - Update DB_CONFIG in app.py with your credentials
+ 4️⃣ Configure database
+ - Create a database in MySQL (e.g., crowd_portal)
+ - Update DB_CONFIG in app.py with your credentials
 
-# 5️⃣ Run the application
+ 5️⃣ Run the application
 python app.py
 
-# 6️⃣ Open your browser
+ 6️⃣ Open your browser
 http://127.0.0.1:5000/
 
 
