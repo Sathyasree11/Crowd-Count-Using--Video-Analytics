@@ -47,6 +47,17 @@ This project integrates **TensorFlow.js**, **Flask**, **MySQL**, and **Chart.js*
 - Built using **HTML5, CSS3, and Vanilla JS**.  
 - Lightweight, fast, and responsive across devices.
 
+## 💻 Technology Stack
+
+| Component | Technology |
+|------------|-------------|
+| **Frontend** | HTML5, CSS3, JavaScript, Chart.js |
+| **AI Detection** | TensorFlow.js + COCO-SSD |
+| **Backend** | Flask (Python) |
+| **Database** | MySQL (PyMySQL) |
+| **Data Logging** | CSV + MySQL |
+| **Visualization** | Chart.js (Line, Bar) |
+
 ---
 
 ## 🗂️ Project Structure
@@ -73,16 +84,6 @@ CrowdCountingPortal/
 ├── zones.json            # Saved zone coordinates
 └── README.md             # Project documentation
 
-## 💻 Technology Stack
-
-| Component | Technology |
-|------------|-------------|
-| **Frontend** | HTML5, CSS3, JavaScript, Chart.js |
-| **AI Detection** | TensorFlow.js + COCO-SSD |
-| **Backend** | Flask (Python) |
-| **Database** | MySQL (PyMySQL) |
-| **Data Logging** | CSV + MySQL |
-| **Visualization** | Chart.js (Line, Bar) |
 
 
 
