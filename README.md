@@ -114,14 +114,14 @@ MySQL Server
 Node.js (optional for frontend editing)
 
 💾 Setup Guide
+
  1️⃣ Clone the repository
-git clone [https://github.com/yourusername/CrowdCountingPortal.git](https://github.com/Sathyasree11/Crowd-Count-Using--Video-Analytics)
-cd CrowdCountingPortal
+git clone https://github.com/Sathyasree11/Crowd-Count-Using--Video-Analytics
 
  2️⃣ Create and activate virtual environment
 python -m venv venv
-venv\Scripts\activate      # (Windows)
-source venv/bin/activate   # (Mac/Linux)
+venv\Scripts\activate      
+source venv/bin/activate   
 
  3️⃣ Install dependencies
 pip install flask pymysql
