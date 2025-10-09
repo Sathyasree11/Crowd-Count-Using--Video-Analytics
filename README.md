@@ -78,14 +78,14 @@ CrowdCountingPortal/
 
 ## 💻 Technology Stack
 
-| Component         | Technology                        |
-| ----------------- | --------------------------------- |
-| **Frontend**      | HTML5, CSS3, JavaScript, Chart.js |
-| **AI Detection**  | TensorFlow.js + COCO-SSD          |
-| **Backend**       | Flask (Python)                    |
-| **Database**      | MySQL (PyMySQL)                   |
-| **Data Logging**  | CSV + MySQL                       |
-| **Visualization** | Chart.js (Line, Bar)              |
+| Component | Technology |
+|------------|-------------|
+| **Frontend** | HTML5, CSS3, JavaScript, Chart.js |
+| **AI Detection** | TensorFlow.js + COCO-SSD |
+| **Backend** | Flask (Python) |
+| **Database** | MySQL (PyMySQL) |
+| **Data Logging** | CSV + MySQL |
+| **Visualization** | Chart.js (Line, Bar) |
 
 ⚙️ How It Works
 
